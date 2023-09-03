@@ -19,18 +19,22 @@ function FormProjectPage(props: IFormProjectPage) {
           <div className="flex flex-row gap-2">
             <h1 className="border p-2 rounded"> {props.user.username}</h1>
             <input
-              className="p-2 rounded-md"
+              className={`w-full p-2 rounded bg-black border-b`}
               type="text"
               placeholder="Project name"
             />
           </div>
 
           <h1 className="mt-2 text-lg">Description (Optional)</h1>
-          <input className="mt-1 rounded-md p-2 " type="text" placeholder="" />
+          <input
+            className={`w-full p-2 rounded bg-black border-b`}
+            type="text"
+            placeholder=""
+          />
 
           <h1 className="mt-2 text-lg">Tags (Optional)</h1>
           <input
-            className="mt-1 rounded-md p-2 mb-2"
+            className={`w-full p-2 rounded bg-black border-b mb-2`}
             type="text"
             placeholder=""
           />
