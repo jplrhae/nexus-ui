@@ -18,3 +18,11 @@ body {
   color: white;
   background-color: #1e1e1e;
 }
+
+.home-page {
+  background: linear-gradient(
+    90deg,
+    rgba(239, 51, 64, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}

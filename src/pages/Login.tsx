@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import Card from "../components/Card";
 import FormItem from "../components/FormItem";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "../components/Button";
 import Page from "../components/Page";
 import FormRow from "../components/FormRow";
@@ -13,7 +13,7 @@ interface ILoginProps {
 }
 
 function Login(props: ILoginProps) {
-  const { mockDatabaseService } = useContext(NexusMockContext);
+  const { mockDatabase, mockDatabaseService } = useContext(NexusMockContext);
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     username: "",
@@ -33,6 +33,10 @@ function Login(props: ILoginProps) {
       navigate(`/profile/${user.id}`);
     }
   };
+
+  useEffect(() => {
+    console.log(mockDatabase);
+  }, []);
 
   return (
     <Page title="Login">
@@ -67,6 +71,18 @@ function Login(props: ILoginProps) {
           />
         </div>
       </Card>
+      <div className="text-sm text-center mb-4">
+        <strong>
+          Hey Austria! You can use any of the available users in the mocked
+          database that is passed in context to the whole app.
+        </strong>
+        <br /> Check the console for the values. (Just typing the username and
+        any value for the password will work)
+        <br />
+        e.g. "username": "joshua", "password": "1234".
+        <br />
+        Or, feel free to create a new account.
+      </div>
       <span className="text-lg">
         Don't have an account yet?{" "}
         <Link to="/register" className="text-primary font-semibold">

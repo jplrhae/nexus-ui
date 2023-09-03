@@ -1,10 +1,7 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-import RegisterPage, {
-  IRegisterForm,
-  rawRegisterForm,
-} from "./pages/RegisterPage";
+import RegisterPage, { IRegisterForm } from "./pages/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
 import CreateProjectPage from "./pages/CreateProjectPage";
 import NexusAppBar from "./components/NexusAppBar";
@@ -15,8 +12,7 @@ import {
   NexusMockContext,
   defaultNexusMockContext,
 } from "./mocks/MockDatabase";
-import { Button } from "@mui/material";
-import { IUser, rawUser } from "./interfaces/IUser";
+import { IUser } from "./interfaces/IUser";
 import FindTalentPage from "./pages/FindTalentPage";
 import FindProjectPage from "./pages/FindProjectPage";
 
@@ -95,11 +91,6 @@ function App() {
     <>
       <NexusMockContext.Provider value={mockData}>
         <NexusAppBar />
-        <Button onClick={() => logUser(rawUser)}>Log test</Button>
-        <Button onClick={() => logUserOut()}>Logout test</Button>
-        <Button onClick={() => registerUser(rawRegisterForm)}>
-          Register new
-        </Button>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
