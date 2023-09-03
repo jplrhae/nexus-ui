@@ -61,7 +61,7 @@ export default function FindProjectPage() {
                   secondary={
                     <div className="flex flex-col">
                       <div>{project.about || ""}</div>
-                      <div>by Joshua Alves</div>
+                      <div>by a User</div>
                     </div>
                   }
                 />

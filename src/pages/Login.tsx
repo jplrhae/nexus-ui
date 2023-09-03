@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import Button from "../components/Button";
 import Page from "../components/Page";
 import FormRow from "../components/FormRow";
-import { IUser } from "../interfaces/IUser";
+import { IUser, rawUser } from "../interfaces/IUser";
 import { NexusMockContext } from "../mocks/MockDatabase";
 
 interface ILoginProps {
@@ -81,7 +81,12 @@ function Login(props: ILoginProps) {
         <br />
         e.g. "username": "joshua", "password": "1234".
         <br />
-        Or, feel free to create a new account.
+        You can also click{" "}
+        <a className="auto-login" onClick={() => props.onLogin(rawUser)}>
+          here
+        </a>{" "}
+        to automatically login with a sample user. Or, feel free to create a new
+        account.
       </div>
       <span className="text-lg">
         Don't have an account yet?{" "}

@@ -26,3 +26,9 @@ body {
     rgba(255, 255, 255, 1) 100%
   );
 }
+
+.auto-login {
+  cursor: pointer;
+  color: #ef3340;
+  font-weight: bold;
+}
