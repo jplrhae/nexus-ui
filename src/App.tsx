@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import RegisterPage from "./pages/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
+import FormProjectPage from "./pages/FormProjectPage";
 import NexusAppBar from "./components/NexusAppBar";
 import Login from "./pages/Login";
 import { rawUser } from "./interfaces/IUser";
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/profile" element={<ProfilePage user={rawUser} />} />
+        <Route path="/project/create" element={<FormProjectPage user={rawUser}/>} />
       </Routes>
     </>
   );
