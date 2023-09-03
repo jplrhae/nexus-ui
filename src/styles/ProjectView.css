@@ -8,11 +8,12 @@
 
 .project-card {
   min-width: 280px;
-  height: 120px;
+  height: 150px;
   background-color: #ef3340;
   border: 1px solid #ccc;
   padding: 10px;
   box-sizing: border-box;
+  justify-content: space-between;
 }
 
 @media (max-width: 768px) {

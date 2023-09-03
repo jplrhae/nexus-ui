@@ -1,28 +1,58 @@
+import { useContext, useEffect, useState } from "react";
+import FollowingView from "../components/FollowingView";
 import ProfileInfo from "../components/ProfileInfo";
 import ProjectsView from "../components/ProjectsView";
-import { rawProjectItems } from "../interfaces/IProject";
-import { IUser } from "../interfaces/IUser";
+import { IUser, rawUser } from "../interfaces/IUser";
+import { useParams } from "react-router-dom";
+import { MockDatabaseContext } from "../mocks/MockDatabase";
+import { LinearProgress } from "@mui/material";
 
-interface IProfilePageProps {
-  user: IUser;
-}
+function ProfilePage() {
+  const { id } = useParams();
+  const { mockDatabaseService } = useContext(MockDatabaseContext);
+  const [user, setUser] = useState<IUser>({
+    id: 0,
+    username: "",
+    email: "",
+    about: "",
+    birthDate: new Date(),
+    name: "",
+  });
+  const [hasLoaded, setHasLoaded] = useState(false);
 
-function ProfilePage(props: IProfilePageProps) {
+  useEffect(() => {
+    if (id) {
+      const user = mockDatabaseService.findUserById(parseInt(id));
+      console.log("Found user: ", user);
+
+      if (user) {
+        setUser(user);
+      }
+    } else {
+      setUser(rawUser);
+    }
+
+    setHasLoaded(true);
+  }, [id]);
+
   return (
     <div
       className="flex flex-row justify-center mt-6 mx-4"
       style={{ height: "calc(100vh - 64px - 1.5rem" }}
     >
-      <div className="flex flex-row justify-center gap-4">
-        <div>
-          <ProfileInfo user={props.user} />
+      {!hasLoaded ? (
+        <LinearProgress />
+      ) : (
+        <div className="flex flex-row justify-center gap-4">
+          <div>
+            <ProfileInfo user={user} />
+          </div>
+          <div>
+            <ProjectsView user={user} />
+            <FollowingView user={user} />
+          </div>
         </div>
-        <div className="basis-2/3">
-          <ProjectsView projects={rawProjectItems} />
-
-          <div className="flex flex-row basis-1/3 "></div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

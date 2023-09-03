@@ -6,9 +6,16 @@ import ProfilePage from "./pages/ProfilePage";
 import FormProjectPage from "./pages/FormProjectPage";
 import NexusAppBar from "./components/NexusAppBar";
 import Login from "./pages/Login";
-import { rawUser } from "./interfaces/IUser";
+import { useContext, useEffect } from "react";
+import { MockDatabaseContext } from "./mocks/MockDatabase";
+import { rawUserItems1 } from "./interfaces/IUser";
 
 function App() {
+  const mockDatabase = useContext(MockDatabaseContext);
+  useEffect(() => {
+    console.log(mockDatabase);
+  }, []);
+
   return (
     <>
       <NexusAppBar />
@@ -16,8 +23,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/profile" element={<ProfilePage user={rawUser} />} />
-        <Route path="/project/create" element={<FormProjectPage user={rawUser}/>} />
+        <Route
+          path="/project/create"
+          element={<FormProjectPage user={rawUserItems1[0]} />}
+        />
+        <Route path="/profile/:id?" element={<ProfilePage />} />
       </Routes>
     </>
   );
