@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { IUser } from "../interfaces/IUser";
 import { Avatar } from "@mui/material";
 

@@ -1,6 +1,7 @@
-import { Grid } from "@mui/material";
 import { IProject } from "../interfaces/IProject";
 import ProjectCard from "./ProjectCard";
+import Button from "@mui/material/Button";
+import "../styles/ProjectView.css";
 
 interface IProjectsViewProps {
   projects: IProject[];
@@ -15,6 +16,9 @@ export default function ProjectsView(props: IProjectsViewProps) {
           <ProjectCard project={project} />
         ))}
       </div>
+      <Button variant="contained" className="flex-end">
+        New project
+      </Button>
     </div>
   );
 }

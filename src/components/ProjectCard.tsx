@@ -1,4 +1,5 @@
 import { IProject } from "../interfaces/IProject";
+import "../styles/ProjectView.css";
 
 interface IProjectCardProps {
   project: IProject;
@@ -6,12 +7,9 @@ interface IProjectCardProps {
 
 export default function ProjectCard(props: IProjectCardProps) {
   return (
-    <div
-      className="flex flex-col p-2 bg-primary"
-      style={{ flexBasis: "calc(33.33% - 10px)", marginBottom: "10px" }}
-    >
-      <div className="text-lg font-bold">{props.project.name}</div>
-      <div className="text-sm">{props.project.description}</div>
+    <div className="project-card flex flex-col p-2 bg-primary basis-0 grow">
+      <div className="font-bold">{props.project.name}</div>
+      <div className="text-sm overflow-hidden">{props.project.description}</div>
     </div>
   );
 }
