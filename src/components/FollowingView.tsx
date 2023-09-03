@@ -1,4 +1,4 @@
-import { AvatarGroup, Avatar, Tooltip } from "@mui/material";
+import { AvatarGroup, Avatar, Tooltip, Button } from "@mui/material";
 import { IUser } from "../interfaces/IUser";
 import PersonIcon from "@mui/icons-material/Person";
 import GroupIcon from "@mui/icons-material/Group";
@@ -22,7 +22,7 @@ export default function FollowingView(props: IFollowingViewProps) {
           <AvatarGroup max={10} className="mt-2">
             {props.following.map((user) => {
               return (
-                <Tooltip title={user.name}>
+                <Tooltip key={user.id} title={user.name}>
                   <Avatar>
                     {user.name.split(" ").map((name) => {
                       return name[0];
@@ -51,6 +51,9 @@ export default function FollowingView(props: IFollowingViewProps) {
             })}
           </AvatarGroup>
         </div>
+      </div>
+      <div className="flex flex-col items-end">
+        <Button variant="contained">Add friend</Button>
       </div>
     </div>
   );

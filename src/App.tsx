@@ -6,8 +6,15 @@ import ProfilePage from "./pages/ProfilePage";
 import NexusAppBar from "./components/NexusAppBar";
 import Login from "./pages/Login";
 import { rawUser } from "./interfaces/IUser";
+import { useContext, useEffect } from "react";
+import { MockDatabaseContext } from "./main";
 
 function App() {
+  const mockDatabase = useContext(MockDatabaseContext);
+  useEffect(() => {
+    console.log(mockDatabase);
+  }, []);
+
   return (
     <>
       <NexusAppBar />

@@ -16,7 +16,7 @@ export default function ProjectsView(props: IProjectsViewProps) {
       </div>
       <div className="flex flex-wrap gap-2">
         {props.projects.map((project) => (
-          <ProjectCard project={project} />
+          <ProjectCard key={project.id} project={project} />
         ))}
       </div>
       <Button variant="contained" className="self-end">
