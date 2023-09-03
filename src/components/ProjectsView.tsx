@@ -3,6 +3,7 @@ import ProjectCard from "./ProjectCard";
 import Button from "@mui/material/Button";
 import DeveloperBoardIcon from "@mui/icons-material/DeveloperBoard";
 import "../styles/ProjectView.css";
+import { useNavigate } from "react-router-dom";
 import { IUser } from "../interfaces/IUser";
 import { useContext, useEffect, useState } from "react";
 import { MockDatabaseContext } from "../mocks/MockDatabase";
@@ -16,6 +17,7 @@ export default function ProjectsView(props: IProjectsViewProps) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [projects, setProjects] = useState<IProject[]>([]);
   const { mockDatabaseService } = useContext(MockDatabaseContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const projects = mockDatabaseService.findProjectsByUserId(props.user.id);
@@ -37,7 +39,11 @@ export default function ProjectsView(props: IProjectsViewProps) {
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
-          <Button variant="contained" className="self-end">
+          <Button
+            variant="contained"
+            className="self-end"
+            onClick={() => navigate("/project/create")}
+          >
             New project
           </Button>
         </>
