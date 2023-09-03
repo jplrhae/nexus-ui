@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function NexusAppBar() {
   return (
-    <div className="bg-black h-16 flex flex-row items-center gap-8">
+    <div className="bg-gradient-to-by h-16 flex flex-row items-center gap-8">
       <Link to="/" className="ml-4">
         <img src={logo} className="h-12 " />
       </Link>

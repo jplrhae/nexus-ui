@@ -76,4 +76,14 @@ export default class MockDatabaseService {
 
     return skill;
   }
+
+  public findallSkills() {
+    console.log("Finding all skills");
+
+    const skills = this.mockDatabase.skills;
+
+    console.log("Found skills", skills);
+
+    return skills;
+  }
 }

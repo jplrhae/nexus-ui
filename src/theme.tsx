@@ -7,16 +7,17 @@ const theme = createTheme({
       main: "#EF3340",
     },
     secondary: {
-      main: "#FFFFFF",
+      main: "#000000",
     },
     error: {
       main: red.A400,
     },
     background: {
-      default: "#333333",
+      default: "#FFFFFF",
     },
     text: {
-      primary: "#FFFFFF",
+      primary: "#000000",
+      secondary: "#000000",
     },
   },
 });

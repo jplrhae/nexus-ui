@@ -5,8 +5,8 @@ import DeveloperBoardIcon from "@mui/icons-material/DeveloperBoard";
 import "../styles/ProjectView.css";
 import { IUser } from "../interfaces/IUser";
 import { useContext, useEffect, useState } from "react";
-import { LinearProgress } from "@mui/material";
 import { MockDatabaseContext } from "../mocks/MockDatabase";
+import { LinearProgress } from "@mui/material";
 
 interface IProjectsViewProps {
   user: IUser;

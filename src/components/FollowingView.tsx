@@ -1,16 +1,11 @@
-import {
-  AvatarGroup,
-  Avatar,
-  Tooltip,
-  Button,
-  LinearProgress,
-} from "@mui/material";
+import { AvatarGroup, Avatar, Tooltip, Button } from "@mui/material";
 import { IUser } from "../interfaces/IUser";
 import PersonIcon from "@mui/icons-material/Person";
 import GroupIcon from "@mui/icons-material/Group";
 import { useState, useContext, useEffect } from "react";
 import { MockDatabaseContext } from "../mocks/MockDatabase";
 import { useNavigate } from "react-router-dom";
+import { LinearProgress } from "@mui/material";
 
 interface IFollowingViewProps {
   user: IUser;
