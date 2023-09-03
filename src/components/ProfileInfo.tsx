@@ -24,6 +24,7 @@ export default function ProfileInfo(props: IProfileInfoProps) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [userSkills, setUserSkills] = useState<ISkill[]>([]);
   const [allSkillTitles, setAllSkillTitles] = useState<string[]>([]);
+  const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const { mockDatabaseService } = useContext(MockDatabaseContext);
   const [openAddSkillModal, setOpenAddSkillModal] = useState(false);
 
@@ -46,7 +47,7 @@ export default function ProfileInfo(props: IProfileInfoProps) {
   }, [props.user]);
 
   const handleSkillSubmit = () => {
-    console.log("Clicked skill submit");
+    console.log("Clicked skill submit, value is", selectedSkill);
   };
 
   return (
@@ -108,9 +109,11 @@ export default function ProfileInfo(props: IProfileInfoProps) {
           <Autocomplete
             className="mt-4"
             disablePortal
-            fullWidth
+            style={{ width: 500, height: 200 }}
             freeSolo
-            id="combo-box-demo"
+            onChange={(e, v) => {
+              setSelectedSkill(v);
+            }}
             options={allSkillTitles}
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Skill" />}
@@ -118,7 +121,9 @@ export default function ProfileInfo(props: IProfileInfoProps) {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenAddSkillModal(false)}>Cancel</Button>
-          <Button onClick={handleSkillSubmit}>Add</Button>
+          <Button onClick={handleSkillSubmit} disabled={!selectedSkill}>
+            Add
+          </Button>
         </DialogActions>
       </Dialog>
     </>

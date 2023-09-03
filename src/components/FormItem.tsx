@@ -27,7 +27,7 @@ function FormItem(props: IFormItemProps) {
           setValue(e.target.value);
           props.onChange(e.target.value);
         }}
-        className={`w-full p-2 rounded bg-black border-b ${
+        className={`w-full p-2 rounded border-b ${
           props.error ? "border-error" : ""
         }`}
         placeholder={props.placeholder}
