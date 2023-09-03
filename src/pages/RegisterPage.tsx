@@ -1,28 +1,45 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Card from "../components/Card";
 import Page from "../components/Page";
 import FormRow from "../components/FormRow";
 import FormItem from "../components/FormItem";
 import Button from "../components/Button";
+import { NexusMockContext } from "../mocks/MockDatabase";
 
-interface IRegisterForm {
+export interface IRegisterForm {
   username: string;
   password: string;
   confirmPassword: string;
   email: string;
   name: string;
-  birthDate: Date | null;
+  birthDate: Date;
+  about?: string;
 }
 
-function RegisterPage() {
+export const rawRegisterForm: IRegisterForm = {
+  username: "newuser",
+  password: "123",
+  confirmPassword: "123",
+  email: "newuser@test.com",
+  name: "New Guy",
+  birthDate: new Date(),
+};
+
+interface IRegisterPageProps {
+  onRegister: (registerData: IRegisterForm) => void;
+}
+
+function RegisterPage(props: IRegisterPageProps) {
   const [registerData, setRegisterData] = useState<IRegisterForm>({
     username: "",
     password: "",
     confirmPassword: "",
     email: "",
     name: "",
-    birthDate: null,
+    birthDate: new Date(),
   });
+
+  const { mockDatabaseService } = useContext(NexusMockContext);
 
   const [isRegistering, setIsRegistering] = useState(false);
 
@@ -37,7 +54,10 @@ function RegisterPage() {
   ): boolean => {
     switch (dataType) {
       case "username":
-        return registerData.username.length > 4;
+        return (
+          registerData.username.length > 4 &&
+          !mockDatabaseService.isDuplicateUsername(registerData.username)
+        );
       case "password":
         return registerData.password.length > 8;
       case "confirmPassword":
@@ -79,6 +99,7 @@ function RegisterPage() {
   const handleRegisterSubmit = () => {
     setIsRegistering(true);
     console.log(registerData);
+    props.onRegister(registerData);
     setIsRegistering(false);
   };
 
@@ -116,6 +137,17 @@ function RegisterPage() {
             error={!isValidRegisterData("birthDate")}
             onChange={(value) =>
               setRegisterData({ ...registerData, birthDate: new Date(value) })
+            }
+          />
+        </FormRow>
+        <FormRow gap={12}>
+          <FormItem
+            name="about"
+            type="text"
+            label="About me:"
+            placeholder="Tell more about yourself"
+            onChange={(value) =>
+              setRegisterData({ ...registerData, about: value })
             }
           />
         </FormRow>

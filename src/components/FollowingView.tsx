@@ -3,17 +3,18 @@ import { IUser } from "../interfaces/IUser";
 import PersonIcon from "@mui/icons-material/Person";
 import GroupIcon from "@mui/icons-material/Group";
 import { useState, useContext, useEffect } from "react";
-import { MockDatabaseContext } from "../mocks/MockDatabase";
+import { NexusMockContext } from "../mocks/MockDatabase";
 import { useNavigate } from "react-router-dom";
 import { LinearProgress } from "@mui/material";
 
 interface IFollowingViewProps {
   user: IUser;
+  isOwnProfile: boolean;
 }
 
 export default function FollowingView(props: IFollowingViewProps) {
   const [hasLoaded, setHasLoaded] = useState(false);
-  const { mockDatabaseService } = useContext(MockDatabaseContext);
+  const { mockDatabaseService } = useContext(NexusMockContext);
   const [following, setFollowing] = useState<IUser[]>([]);
   const [followed, setFollowed] = useState<IUser[]>([]);
   const navigate = useNavigate();
@@ -95,9 +96,11 @@ export default function FollowingView(props: IFollowingViewProps) {
               </AvatarGroup>
             </div>
           </div>
-          <div className="flex flex-col items-end mt-4">
-            <Button variant="contained">Add friend</Button>
-          </div>
+          {props.isOwnProfile && (
+            <div className="flex flex-col items-end mt-4">
+              <Button variant="contained">Add friend</Button>
+            </div>
+          )}
         </>
       )}
     </div>

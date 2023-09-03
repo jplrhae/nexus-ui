@@ -21,9 +21,10 @@ export interface IMockDatabase {
   userSkills: IUserSkill[];
 }
 
-export interface IMockDatabaseContext {
+export interface INexusMockContext {
   mockDatabase: IMockDatabase;
   mockDatabaseService: MockDatabaseService;
+  loggedUser: IUser | undefined;
 }
 
 export const mockDatabase: IMockDatabase = {
@@ -34,7 +35,12 @@ export const mockDatabase: IMockDatabase = {
   userSkills: rawUserSkillItems,
 };
 
-export const MockDatabaseContext = createContext<IMockDatabaseContext>({
+export const defaultNexusMockContext: INexusMockContext = {
   mockDatabase: mockDatabase,
   mockDatabaseService: new MockDatabaseService(mockDatabase),
-});
+  loggedUser: undefined,
+};
+
+export const NexusMockContext = createContext<INexusMockContext>(
+  defaultNexusMockContext
+);

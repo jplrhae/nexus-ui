@@ -1,23 +1,37 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Card from "../components/Card";
 import FormItem from "../components/FormItem";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../components/Button";
 import Page from "../components/Page";
 import FormRow from "../components/FormRow";
+import { IUser } from "../interfaces/IUser";
+import { NexusMockContext } from "../mocks/MockDatabase";
 
-function Login() {
+interface ILoginProps {
+  onLogin: (user: IUser) => void;
+}
+
+function Login(props: ILoginProps) {
+  const { mockDatabaseService } = useContext(NexusMockContext);
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
   });
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
+  // Add user validation here
   const handleLoginSubmit = () => {
     setIsLoggingIn(true);
-    const { username, password } = loginData;
-    console.log(username, password);
-    setIsLoggingIn(false);
+    const { username } = loginData;
+    const user = mockDatabaseService.findUserByUsername(username);
+
+    if (user) {
+      setIsLoggingIn(false);
+      props.onLogin(user);
+      navigate(`/profile/${user.id}`);
+    }
   };
 
   return (

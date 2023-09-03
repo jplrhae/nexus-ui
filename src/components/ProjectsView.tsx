@@ -6,17 +6,20 @@ import "../styles/ProjectView.css";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../interfaces/IUser";
 import { useContext, useEffect, useState } from "react";
-import { MockDatabaseContext } from "../mocks/MockDatabase";
+import { NexusMockContext } from "../mocks/MockDatabase";
 import { LinearProgress } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 interface IProjectsViewProps {
   user: IUser;
+  isOwnProfile: boolean;
 }
 
 export default function ProjectsView(props: IProjectsViewProps) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [projects, setProjects] = useState<IProject[]>([]);
-  const { mockDatabaseService } = useContext(MockDatabaseContext);
+  const { mockDatabaseService } = useContext(NexusMockContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,20 +35,34 @@ export default function ProjectsView(props: IProjectsViewProps) {
       ) : (
         <>
           <div className="text-2xl font-bold">
-            <DeveloperBoardIcon /> Projects ({projects.length})
+            <DeveloperBoardIcon /> Projects ({projects.length}) -{" "}
+            <VisibilityIcon />{" "}
+            {projects.filter((project) => project.isPublic).length} |{" "}
+            <VisibilityOffIcon />{" "}
+            {projects.filter((project) => !project.isPublic).length}
           </div>
           <div className="flex flex-wrap gap-2">
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
+            {projects.map((project) => {
+              if (props.isOwnProfile) {
+                return <ProjectCard key={project.id} project={project} />;
+              } else {
+                return (
+                  project.isPublic && (
+                    <ProjectCard key={project.id} project={project} />
+                  )
+                );
+              }
+            })}
           </div>
-          <Button
-            variant="contained"
-            className="self-end"
-            onClick={() => navigate(`/${props.user.id}/project/new`)}
-          >
-            New project
-          </Button>
+          {props.isOwnProfile && (
+            <Button
+              variant="contained"
+              className="self-end"
+              onClick={() => navigate(`/${props.user.id}/project/new`)}
+            >
+              New project
+            </Button>
+          )}
         </>
       )}
     </div>

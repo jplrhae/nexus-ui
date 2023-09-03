@@ -12,12 +12,14 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { MockDatabaseContext } from "../mocks/MockDatabase";
+import { NexusMockContext } from "../mocks/MockDatabase";
 import { Add } from "@mui/icons-material";
 import { LinearProgress } from "@mui/material";
 
 interface IProfileInfoProps {
   user: IUser;
+  isOwnProfile: boolean;
+  onNewSkillSubmit: (skillTitle: string) => ISkill;
 }
 
 export default function ProfileInfo(props: IProfileInfoProps) {
@@ -25,10 +27,13 @@ export default function ProfileInfo(props: IProfileInfoProps) {
   const [userSkills, setUserSkills] = useState<ISkill[]>([]);
   const [allSkillTitles, setAllSkillTitles] = useState<string[]>([]);
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
-  const { mockDatabaseService } = useContext(MockDatabaseContext);
+  const { mockDatabaseService } = useContext(NexusMockContext);
   const [openAddSkillModal, setOpenAddSkillModal] = useState(false);
+  const { mockDatabase } = useContext(NexusMockContext);
 
   useEffect(() => {
+    console.log("In useffect");
+
     const userSkills = mockDatabaseService.findUserSkillsByUserId(
       props.user.id
     );
@@ -36,18 +41,25 @@ export default function ProfileInfo(props: IProfileInfoProps) {
       mockDatabaseService.findSkillById(userSkill.skillId)
     );
     const allSkillsTitleList: string[] = [];
-    const allSkills = mockDatabaseService.findallSkills();
+    const allSkills = mockDatabaseService.findAllSkills();
     allSkills.forEach((skill) => {
-      allSkillsTitleList.push(skill.title);
+      if (!userSkills.find((userSkill) => userSkill.skillId === skill.id)) {
+        allSkillsTitleList.push(skill.title);
+      }
     });
 
     setUserSkills(skills);
     setAllSkillTitles(allSkillsTitleList);
     setHasLoaded(true);
-  }, [props.user]);
+  }, [props.user, mockDatabase]);
 
   const handleSkillSubmit = () => {
+    setHasLoaded(false);
     console.log("Clicked skill submit, value is", selectedSkill);
+    const skill = props.onNewSkillSubmit(selectedSkill!);
+    userSkills.push(skill);
+    setUserSkills([...userSkills]);
+    setHasLoaded(true);
   };
 
   return (
@@ -59,7 +71,7 @@ export default function ProfileInfo(props: IProfileInfoProps) {
               height: 190,
               width: 190,
               backgroundColor: "primary.main",
-              color: "secondary.main",
+              color: "white",
               fontSize: "50px",
             }}
           >
@@ -90,14 +102,15 @@ export default function ProfileInfo(props: IProfileInfoProps) {
               </div>
             </>
           )}
-          <Button
-            className="self-end"
-            startIcon={<Add />}
-            variant="contained"
-            onClick={() => setOpenAddSkillModal(true)}
-          >
-            Add skill
-          </Button>
+          {props.isOwnProfile && (
+            <Button
+              startIcon={<Add />}
+              variant="contained"
+              onClick={() => setOpenAddSkillModal(true)}
+            >
+              Add skill
+            </Button>
+          )}
         </div>
       </div>
       <Dialog
@@ -111,7 +124,7 @@ export default function ProfileInfo(props: IProfileInfoProps) {
             disablePortal
             style={{ width: 500, height: 200 }}
             freeSolo
-            onChange={(e, v) => {
+            onChange={(_e, v) => {
               setSelectedSkill(v);
             }}
             options={allSkillTitles}

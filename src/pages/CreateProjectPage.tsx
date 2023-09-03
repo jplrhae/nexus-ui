@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { IUser } from "../interfaces/IUser";
 import { useContext, useEffect, useState } from "react";
-import { MockDatabaseContext } from "../mocks/MockDatabase";
+import { NexusMockContext } from "../mocks/MockDatabase";
 import FormRow from "../components/FormRow";
 import FormItem from "../components/FormItem";
 import { IProject } from "../interfaces/IProject";
@@ -25,7 +25,7 @@ function CreateProjectPage() {
   });
   const [projectTags, setProjectTags] = useState<ISkill[]>([]);
   const [isRegistering, setIsRegistering] = useState(false);
-  const { mockDatabaseService } = useContext(MockDatabaseContext);
+  const { mockDatabaseService } = useContext(NexusMockContext);
 
   useEffect(() => {
     if (userId) {
