@@ -16,7 +16,7 @@ export default function ProjectsView(props: IProjectsViewProps) {
           <ProjectCard project={project} />
         ))}
       </div>
-      <Button variant="contained" className="flex-end">
+      <Button variant="contained" className="self-end">
         New project
       </Button>
     </div>
