@@ -71,7 +71,7 @@ export default function ProfileInfo(props: IProfileInfoProps) {
           </div>
         </div>
         <div className="mt-2">{props.user.about}</div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-4">
           {!hasLoaded ? (
             <LinearProgress />
           ) : (

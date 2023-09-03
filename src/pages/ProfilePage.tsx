@@ -37,19 +37,19 @@ function ProfilePage() {
 
   return (
     <div
-      className="flex flex-row justify-center mt-6 mx-4"
+      className="flex flex-row justify-evenly mt-6 w-screen"
       style={{ height: "calc(100vh - 64px - 1.5rem" }}
     >
       {!hasLoaded ? (
         <LinearProgress />
       ) : (
-        <div className="flex flex-row justify-center gap-4">
+        <>
           <ProfileInfo user={user} />
           <div>
             <ProjectsView user={user} />
             <FollowingView user={user} />
           </div>
-        </div>
+        </>
       )}
     </div>
   );

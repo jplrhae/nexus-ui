@@ -7,17 +7,18 @@ function NexusAppBar() {
       <Link to="/" className="ml-4">
         <img src={logo} className="h-12 " />
       </Link>
-      <Link to="/feed">
-        <h1 className="font-bold">FEED</h1>
+      <Link to="/login">
+        <h1 className="font-bold">LOGIN/REGISTER</h1>
       </Link>
-      <Link to="/challenges">
-        <h1 className="font-bold">CHALLENGES</h1>
-      </Link>
-      <Link to="/profile">
+
+      <h1 style={{ opacity: 0.5, cursor: "default" }} className="font-bold">
+        FEED
+      </h1>
+      <h1 style={{ opacity: 0.5, cursor: "default" }} className="font-bold">
+        CHALLENGES
+      </h1>
+      <Link to="/profile" className="ml-auto mr-4">
         <h1 className="font-bold">PROFILE</h1>
-      </Link>
-      <Link to="/login" className="ml-auto mr-4">
-        <h1 className="font-bold">LOGIN</h1>
       </Link>
     </div>
   );
