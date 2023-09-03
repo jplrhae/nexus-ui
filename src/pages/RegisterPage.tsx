@@ -57,7 +57,7 @@ function RegisterPage() {
     }
   };
 
-  const isValidRegisterForm = (form: IRegisterForm): boolean => {
+  const isValidRegisterForm = (): boolean => {
     console.log("Reached isValidRegisterForm");
     console.log(isValidRegisterData("username"));
     console.log(isValidRegisterData("password"));
@@ -157,7 +157,7 @@ function RegisterPage() {
           <Button
             onClick={handleRegisterSubmit}
             text="Create account"
-            disabled={isRegistering || !isValidRegisterForm(registerData)}
+            disabled={isRegistering || !isValidRegisterForm()}
           />
         </div>
       </Card>

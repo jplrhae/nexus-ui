@@ -3,10 +3,13 @@ import { useState } from "react";
 interface IFormItemProps {
   name: string;
   type: "password" | "text" | "email" | "number" | "date";
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   error?: boolean;
   label?: string;
   placeholder?: string;
+  disabled?: boolean;
+  value?: string;
+  height?: number;
 }
 
 function FormItem(props: IFormItemProps) {
@@ -23,13 +26,18 @@ function FormItem(props: IFormItemProps) {
         type={props.type}
         id={props.name}
         name={props.name}
+        style={{ height: props.height || 50 }}
         onChange={(e) => {
           setValue(e.target.value);
-          props.onChange(e.target.value);
+          if (props.onChange) {
+            props.onChange(e.target.value);
+          }
         }}
         className={`w-full p-2 rounded border-b ${
           props.error ? "border-error" : ""
         }`}
+        value={props.value || value}
+        disabled={props.disabled}
         placeholder={props.placeholder}
         required={props.error}
       />

@@ -42,7 +42,7 @@ export default function ProjectsView(props: IProjectsViewProps) {
           <Button
             variant="contained"
             className="self-end"
-            onClick={() => navigate("/project/create")}
+            onClick={() => navigate(`/${props.user.id}/project/new`)}
           >
             New project
           </Button>
