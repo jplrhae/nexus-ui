@@ -41,16 +41,16 @@ function FormProjectPage(props: IFormProjectPage) {
 
           <div className="flex flew-row gap-1">
             <button className="bg-sky-500 rounded p-1 bg-[#0ea5e9bf]">
-              #Exemplo1
+              #Microcomponents
             </button>
             <button className="bg-sky-500 rounded p-1 bg-[#0ea5e9bf]">
-              #Exemplo2
+              #EmbeddedSystems
             </button>
             <button className="bg-sky-500 rounded p-1 bg-[#0ea5e9bf]">
-              #Exemplo3
+              #ChipDesign
             </button>
             <button className="bg-sky-500 rounded p-1 bg-[#0ea5e9bf]">
-              #Exemplo4
+              #DigitalCircuits
             </button>
           </div>
           <button className="bg-[#EF3340] rounded p-1 mt-4">
