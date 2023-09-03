@@ -5,9 +5,8 @@ import RegisterPage from "./pages/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
 import NexusAppBar from "./components/NexusAppBar";
 import Login from "./pages/Login";
-import { rawUser } from "./interfaces/IUser";
 import { useContext, useEffect } from "react";
-import { MockDatabaseContext } from "./main";
+import { MockDatabaseContext } from "./mocks/MockDatabase";
 
 function App() {
   const mockDatabase = useContext(MockDatabaseContext);
@@ -22,7 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/profile" element={<ProfilePage user={rawUser} />} />
+        <Route path="/profile/:id?" element={<ProfilePage />} />
       </Routes>
     </>
   );
