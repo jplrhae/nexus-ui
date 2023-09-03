@@ -1,7 +1,8 @@
+import FollowingView from "../components/FollowingView";
 import ProfileInfo from "../components/ProfileInfo";
 import ProjectsView from "../components/ProjectsView";
 import { rawProjectItems } from "../interfaces/IProject";
-import { IUser } from "../interfaces/IUser";
+import { IUser, rawUserItems1, rawUserItems2 } from "../interfaces/IUser";
 
 interface IProfilePageProps {
   user: IUser;
@@ -17,10 +18,9 @@ function ProfilePage(props: IProfilePageProps) {
         <div>
           <ProfileInfo user={props.user} />
         </div>
-        <div className="basis-2/3">
+        <div>
           <ProjectsView projects={rawProjectItems} />
-
-          <div className="flex flex-row basis-1/3 "></div>
+          <FollowingView following={rawUserItems1} followed={rawUserItems2} />
         </div>
       </div>
     </div>
