@@ -67,6 +67,7 @@ export default function FollowingView(props: IFollowingViewProps) {
                     <Tooltip key={user.id} title={user.name}>
                       <Avatar
                         onClick={() => navigate(`/profile/${user.id}`, {})}
+                        sx={{ cursor: "pointer" }}
                       >
                         {user.name.split(" ").map((name) => {
                           return name[0];
@@ -87,6 +88,7 @@ export default function FollowingView(props: IFollowingViewProps) {
                     <Tooltip key={user.id} title={user.name}>
                       <Avatar
                         onClick={() => navigate(`/profile/${user.id}`, {})}
+                        sx={{ cursor: "pointer" }}
                       >
                         {user.name.split(" ").map((name) => {
                           return name[0];

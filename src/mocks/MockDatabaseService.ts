@@ -52,4 +52,28 @@ export default class MockDatabaseService {
 
     return userFollowingRelations;
   }
+
+  public findUserSkillsByUserId(userId: number) {
+    console.log("Finding user skills by user ID", userId);
+
+    const userSkills = this.mockDatabase.userSkills.filter(
+      (userSkill) => userSkill.userId === userId
+    );
+
+    console.log("Found user skills", userSkills);
+
+    return userSkills;
+  }
+
+  public findSkillById(skillId: number) {
+    console.log("Finding skill by ID", skillId);
+
+    const skill = this.mockDatabase.skills.filter(
+      (skill) => skill.id === skillId
+    )[0];
+
+    console.log("Found skill", skill);
+
+    return skill;
+  }
 }

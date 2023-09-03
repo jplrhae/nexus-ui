@@ -1,13 +1,32 @@
+import { useContext, useEffect, useState } from "react";
+import { ISkill } from "../interfaces/ISkills";
 import { IUser } from "../interfaces/IUser";
-import { Avatar } from "@mui/material";
+import { Avatar, Button, Chip, LinearProgress } from "@mui/material";
+import { MockDatabaseContext } from "../mocks/MockDatabase";
 
 interface IProfileInfoProps {
   user: IUser;
 }
 
 export default function ProfileInfo(props: IProfileInfoProps) {
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [userSkills, setUserSkills] = useState<ISkill[]>([]);
+  const { mockDatabaseService } = useContext(MockDatabaseContext);
+
+  useEffect(() => {
+    const userSkills = mockDatabaseService.findUserSkillsByUserId(
+      props.user.id
+    );
+    const skills = userSkills.map((userSkill) =>
+      mockDatabaseService.findSkillById(userSkill.skillId)
+    );
+
+    setUserSkills(skills);
+    setHasLoaded(true);
+  }, [props.user]);
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col grow-0 shrink-0 basis-1/3">
       <div className="flex flex-col">
         <Avatar
           sx={{
@@ -26,6 +45,25 @@ export default function ProfileInfo(props: IProfileInfoProps) {
         </div>
       </div>
       <div className="mt-2">{props.user.about}</div>
+      <div className="flex flex-col gap-2">
+        {!hasLoaded ? (
+          <LinearProgress />
+        ) : (
+          <>
+            <div className="text-2xl font-bold mt-2">Skills</div>
+            <div className="flex flex-row flex-wrap gap-2">
+              {userSkills.map((skill) => (
+                <>
+                  <Chip className="" key={skill.id} label={skill.title}></Chip>
+                </>
+              ))}
+            </div>
+          </>
+        )}
+        <Button className="self-end" variant="contained">
+          Add skill
+        </Button>
+      </div>
     </div>
   );
 }

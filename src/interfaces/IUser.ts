@@ -305,4 +305,12 @@ export const rawUserItems2: IUser[] = [
     email: "ethan@example.com",
     birthDate: new Date("1992-06-16"),
   },
+  {
+    id: 33,
+    name: "Joshua Alves",
+    about: "I am a microelectronics engineer.",
+    username: "jplrhae",
+    email: "joshualoesch@gmail.com",
+    birthDate: new Date("2002-31-10"),
+  },
 ];

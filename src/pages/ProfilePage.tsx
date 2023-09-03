@@ -44,9 +44,7 @@ function ProfilePage() {
         <LinearProgress />
       ) : (
         <div className="flex flex-row justify-center gap-4">
-          <div>
-            <ProfileInfo user={user} />
-          </div>
+          <ProfileInfo user={user} />
           <div>
             <ProjectsView user={user} />
             <FollowingView user={user} />
