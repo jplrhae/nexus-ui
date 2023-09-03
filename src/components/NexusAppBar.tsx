@@ -1,5 +1,3 @@
-import React from "react";
-
 import logo from "../img/nexus-logo-200.png";
 import { Link } from "react-router-dom";
 
